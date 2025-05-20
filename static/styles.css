@@ -226,3 +226,31 @@ nav button {
         max-width: 95%;
     }
 }
+.quotes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.quote-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 280px;
+    background-color: #fdfdfd;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.quote-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.quote-card blockquote {
+    font-style: italic;
+    color: slategray;
+    margin: 0;
+}

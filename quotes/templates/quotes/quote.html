@@ -1,0 +1,11 @@
+<!-- quotes/templates/quote.html -->
+{% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Quote from Dr. Seuss!</h1>
+
+    <img src="{% static image %}" alt="Dr. Seuss image" style="max-width: 300px;"><br><br>
+    
+    <blockquote>{{ quote }}</blockquote>
+{% endblock %}

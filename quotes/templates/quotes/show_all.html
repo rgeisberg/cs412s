@@ -1,0 +1,15 @@
+{% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>All Dr. Seuss Quotes</h1>
+
+    <div class="quotes-container">
+        {% for quote, image in all_quotes_images %}
+            <div class="quote-card">
+                <img src="{% static image %}" alt="Dr. Seuss image">
+                <blockquote>{{ quote }}</blockquote>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
