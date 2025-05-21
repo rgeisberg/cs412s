@@ -1,0 +1,28 @@
+<!---quotes/templates/about.html-->
+{% extends 'quotes/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-wrapper">
+    <h1>About Dr. Seuss</h1>
+
+    <section class="about-section">
+        <img class="Portrait" src="{% static image %}" alt="Dr. Seuss Portrait">
+
+        <p>
+            Dr. Seuss, born Theodor Seuss Geisel in 1904, was a beloved American author and illustrator best known for his imaginative children's books.
+            Over his career, he wrote more than 60 books, including timeless classics like <em>The Cat in the Hat</em>, <em>Green Eggs and Ham</em>, and <em>Oh, the Places You'll Go!</em>
+        </p>
+
+        <p>
+            His stories often combined clever rhymes, whimsical characters, and meaningful life lessons. Whether promoting creativity, environmental awareness, or self-confidence,
+            Dr. Seuss’s works continue to inspire children and adults alike around the world.
+        </p>
+
+        <p>
+            Beyond books, his influence reached television, film, and education, earning him numerous awards including two Academy Awards, two Emmys, and a Pulitzer Prize.
+            He passed away in 1991, but his legacy endures through his unforgettable words and illustrations.
+        </p>
+    </section>
+</div>
+{% endblock %}

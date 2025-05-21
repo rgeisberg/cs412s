@@ -14,14 +14,18 @@ quotes = ["You have brains in your head. You have feet in your shoes. You can st
            ]
 image_urls = ["images/oh_the_places_youll_go.jpg",
               "images/lorax.jpg",
-              "images/one_fish_two_fish.jpg"               
+              "images/one_fish_two_fish.jpg",
+              "images/Dr_suess.jpg"               
             ]
 
 def about(request):
     '''Respond to the URL 'about', delegate work to a template'''
     template_name ='quotes/about.html'
     #dictionary of context variables
-    return render(request, template_name,)
+    context = {
+        "image": "images/Dr_suess.jpg"
+    }
+    return render(request, template_name, context)
 
 def show_all(request):
     '''Respond to the URL 'show_all', delegate work to a template'''
