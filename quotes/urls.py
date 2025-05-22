@@ -1,4 +1,6 @@
-#file: urls.py
+# File: urls.py
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: url file for quotes
 
 from django.urls import path
 from django.conf import settings

@@ -1,3 +1,6 @@
+# File: views.py
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: views file for quotes
 from django.shortcuts import render
 
 # Create your views here.
