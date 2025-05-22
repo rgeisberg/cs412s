@@ -1,0 +1,122 @@
+/* # File: main.html
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: main html file for restaurants */
+/* === Base Page Styling === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff0f5;
+    color: #4a3f45;
+    margin: 0;
+    padding: 0;
+}
+
+/* === Navigation Bar === */
+nav {
+    background-color: #ffd6e8;
+    padding: 12px 20px;
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid #f9b6d2;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: #c44587;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e754a6;
+}
+
+/* === Main Content Area === */
+div {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fffafa;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* === Headings === */
+h1 {
+    font-size: 2em;
+    color: #d03d83;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f9c2dd;
+    padding-bottom: 5px;
+}
+
+h3 {
+    color: #a13f6f;
+    margin-top: 25px;
+}
+
+/* === Form Elements === */
+form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e7b5cd;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    background-color: #fff6fb;
+    font-size: 1em;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 6px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* === Submit Button === */
+input[type="submit"] {
+    background-color: #d03d83;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #aa2f68;
+}
+
+/* === Footer === */
+footer {
+    text-align: center;
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* === Images === */
+.bakery-image {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
