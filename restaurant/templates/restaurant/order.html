@@ -1,0 +1,59 @@
+<!-- # File: order.html
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: order html file for restaurants -->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div>
+<h1>Order Page</h1>
+<form name="confirmation" action="{% url 'confirmation_page' %}"method="POST">
+    {% csrf_token %}
+    <h3>Select pastries :</h3>
+        <div>
+        <label><input type="checkbox" name="cheese_danish" value="ordered">Cheese Danish $4</label><br>
+        <label>Warmed up?</label>
+            <label><input type="radio" name="cheese-yes-no" value="yes">Yes</label>
+            <label><input type="radio" name="cheese-yes-no" value="no">No</label>
+        </div>
+        <div>
+            <label><input type="checkbox" name="cinnamon_twist" value="ordered">Cinnamon Twist $3.50</label><br>
+            <label>Warmed up?</label>
+                <label><input type="radio" name="cinnamon-yes-no" value="yes">Yes</label>
+                <label><input type="radio" name="cinnamon- yes-no" value="no">No</label>
+        </div>
+
+        <div>
+            <label><input type="checkbox" name="chocolate_chip_muffin" value="ordered">Chocolate Chip Muffin $3.50</label><br>
+            <label>Warmed up?</label>
+                <label><input type="radio" name="muffin-yes-no" value="yes">Yes</label>
+                <label><input type="radio" name="muffin-yes-no" value="no">No</label>
+        </div>
+
+        <div>
+            <label><input type="checkbox" name="fruit_tart" value="ordered">Fruit Tart $4</label>
+        </div>
+        <div>
+            <h3>Daily Special:</h3>
+            <label><input type="checkbox" name="daily_special">{{daily_special}}</label>
+        </div>
+        <div>
+            <h3>Special Instructions:</h3>
+            <textarea placeholder="Write your delicious pastry ideas here..." name="special_instructions" rows="3" cols="60"></textarea>
+        </div>
+        <div>
+            <h3>Customer Info:</h3>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="phone_number">Phone #:</label>
+            <input type="text" id="phone_number" name="phone_number">
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+        </div>
+        <input type="submit">
+
+    </div>
+</form>
+{% endblock %}

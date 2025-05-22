@@ -1,0 +1,23 @@
+<!-- # File: base.html
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: base html file for restaurants -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Bakery</title>
+        <link rel="stylesheet" href="{% static 'restaurant.css' %}">
+    </head>
+    <body>
+        <nav>
+            <li><a href="{% url 'main_page' %}">Home</a></li>
+            <li><a href="{% url 'order_page' %}">Order Now!</a></li>
+        </nav>
+        
+    {% block content %}
+    {% endblock %}
+    <footer>
+        Made By Becky Geisberg 2025
+    </footer>
+    </body>
+</html>

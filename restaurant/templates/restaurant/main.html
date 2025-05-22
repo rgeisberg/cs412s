@@ -1,0 +1,15 @@
+<!-- # File: main.html
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: main html file for restaurants -->
+
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+<h1>Main Page</h1>
+<img src="{% static image %}" alt="bakery image" class="bakery-image">
+<p>Welcome to the Bakery! We sell yummy pastries here.</p>
+
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!-- # File: confirmation.html
+# Author: Becky Geisberg, (rgeis26@bu.edu)
+# Description: confirmaiton html page for restaurant  -->
+
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div>
+<h1>Confirmation Page </h1>
+<p>You Have ordered:</p>
+    <div>
+        Name: {{name}} <br>
+        Phone Number : {{phone_number}} <br>
+        Email: {{email}} <br>
+        Special Instructions: {{special_instructions}} <br>
+        Daily Special: {{daily_special}}<br>
+        Cheese Danish: {{cheese_danish}} <br>
+        Warmed Danish: {{warmed_danish}} <br>
+        Cinnamon Twist: {{cinnamon_twist}} <br>
+        Warmed Twist: {{warmed_twist}} <br>
+        Chocolate Chip Muffin: {{chocolate_chip_muffin}} <br>
+        Warmed Muffin: {{warmed_muffin}} <br>
+        Fruit Tart: {{fruit_tart}}     
+    </div>
+    <div>
+        <h3>expected order pickup time = {{time}} </h3>
+    </div>
+
+</div>
+{% endblock %}
