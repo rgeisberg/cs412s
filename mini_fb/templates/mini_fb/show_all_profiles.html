@@ -1,0 +1,28 @@
+<!---File: show_all_profiles.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+ Description: show_all_profiles file for mini_fb-->
+
+ {% extends 'mini_fb/base.html' %}
+
+ {% block content %}
+ <h1>Showing all articles</h1>
+ 
+ <!-- This displays the QuerySet of all articles -->
+
+  <main class="grid-container">
+     <!---scriptlet code for a for-loop-->
+     {% for profile in profiles %}
+     <profile>
+         <div>
+             <h2>{{profile.firstName}}</h2>
+             <h2>{{profile.lastName}}</h2>
+         </div>
+         
+         <img src="{{profile.profileImageUrl}}" alt="">
+         
+        </profile>
+     <hr>
+     {% endfor %}
+ 
+ </main>
+  {% endblock %}

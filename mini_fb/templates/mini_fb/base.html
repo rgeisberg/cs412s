@@ -1,0 +1,26 @@
+<!---File: base.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: base.html file for mini_fb-->
+
+ {% load static %}
+<html>
+    <head>
+        <title>Profiles</title>
+        <link rel="stylesheet" href="{% static 'styles-mini-fb.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Profiles</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'show_all_profiles' %}">Show All Profiles</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+    {% block content %}
+    {% endblock %}    
+  
+    </body>
+</html>
+
