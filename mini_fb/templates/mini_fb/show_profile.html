@@ -5,35 +5,30 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
  {% extends 'mini_fb/base.html' %}
 
  {% block content %}
- <h1>Showing all articles</h1>
+ <main class="profile-container">
+     <section class="profile-card">
+         <img src="{{profile.profileImageUrl}}" alt="Profile Image">
+         <h2>{{profile.firstName}} {{profile.lastName}}</h2>
+         <p><strong>City:</strong> {{profile.city}}</p>
+         <p><strong>Email:</strong> {{profile.email}}</p>
+     </section>
  
- <!-- This displays the QuerySet of all articles -->
-
-  <main class="grid-container">
-     <article>
-         <div>
-             <h2>{{profile.firstName}}</h2>
-             <h2>{{profile.lastName}}</h2>
-             <h2>{{profile.city}}</h2>
-             <h2>{{profile.email}}</h2>
+     <div class="status-button-wrapper">
+         <a href="{% url 'create_status' profile.pk %}" class="status-button"> Add Status Message</a>
+     </div>
+ 
+     <h2>Status Messages</h2>
+ 
+     <section class="status-list">
+         {% for status_message in profile.get_status_messages %}
+         <div class="status-message">
+             <strong>by {{status_message.profile}} at {{status_message.timestamp}}</strong>
+             <p>{{status_message.message}}</p>
          </div>
-         
-         <img src="{{profile.profileImageUrl}}" alt="">
-         
-        </article>
-        <li><a href="{% url 'create_status' profile.pk %}">Create Status Message</a></li>
-        <h2>Status messages</h2>
-
-        {% for status_message in profile.get_status_messages %}
-        <article>
-            <div>
-            <strong>by {{status_message.profile}} at {{status_message.timestamp}}</strong>
-            <p>
-            {{status_message.message}}
-            </div>
-        </article>
-
-        {% endfor %}
- 
+         {% empty %}
+         <p class="no-status">No status messages yet.</p>
+         {% endfor %}
+     </section>
  </main>
-  {% endblock %}
+ {% endblock %}
+ 
