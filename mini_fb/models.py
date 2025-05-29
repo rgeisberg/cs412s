@@ -2,6 +2,7 @@
 # Author: Becky Geisberg, (rgeis26@bu.edu)
 # Description: model file for mini_fb
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -23,6 +24,9 @@ class Profile(models.Model):
           """return all status messages for a particular user"""
           status_messages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
           return status_messages
+    def get_absolute_url(self):
+        """display new profile"""
+        return reverse('profile', kwargs={'pk':self.pk})
           
 
 
@@ -36,5 +40,6 @@ class StatusMessage(models.Model):
     def __str__(self):
             """return a string representation of this model"""
             return f'{self.message} made at {self.timestamp} by {self.profile}'
+    
 
 

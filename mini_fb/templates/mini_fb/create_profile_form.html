@@ -1,0 +1,34 @@
+<!---File: create_profile_form.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: create profile html file for mini_fb-->
+
+<!-- mini_fb/templates/mini_fb/create_profile_form.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h2>Add a profile</h2>
+
+<form method = 'POST'>
+
+<!-- customized table version here -->
+
+{% csrf_token %}
+    <table>
+    {% for field in form %}
+          <tr>
+            <th>{{field.name}}</th>
+            <td>{{field}}</td>
+        </tr>
+  
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+            <input type='submit' name = 'Add Profile' value= 'addProfile'>
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}
