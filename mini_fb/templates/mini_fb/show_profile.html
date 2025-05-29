@@ -21,6 +21,7 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
          <img src="{{profile.profileImageUrl}}" alt="">
          
         </article>
+        <li><a href="{% url 'create_status' profile.pk %}">Create Status Message</a></li>
         <h2>Status messages</h2>
 
         {% for status_message in profile.get_status_messages %}
