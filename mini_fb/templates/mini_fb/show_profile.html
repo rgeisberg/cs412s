@@ -21,6 +21,18 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
          <img src="{{profile.profileImageUrl}}" alt="">
          
         </article>
+        <h2>Status messages</h2>
+
+        {% for status_message in profile.get_status_messages %}
+        <article>
+            <div>
+            <strong>by {{status_message.profile}} at {{status_message.timestamp}}</strong>
+            <p>
+            {{status_message.message}}
+            </div>
+        </article>
+
+        {% endfor %}
  
  </main>
   {% endblock %}

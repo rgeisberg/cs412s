@@ -18,5 +18,23 @@ class Profile(models.Model):
     def __str__(self):
             """return a string representation of this model"""
             return f'{self.firstName} {self.lastName}'
+    
+    def get_status_messages(self):
+          """return all status messages for a particular user"""
+          status_messages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
+          return status_messages
+          
+
+
+class StatusMessage(models.Model):
+    """Encapsulate the data of a status message """
+    #define the data attributes
+    timestamp = models.DateTimeField(auto_now=True)
+    message = models.TextField(blank=True)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+
+    def __str__(self):
+            """return a string representation of this model"""
+            return f'{self.message} made at {self.timestamp} by {self.profile}'
 
 
