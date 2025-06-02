@@ -1,25 +1,49 @@
-<!---blog/article.html-->
+<!-- blog/article.html 
+    display a single article on this web page
+-->
 {% extends 'blog/base.html' %}
 
 {% block content %}
 <h1>{{article.title}}</h1>
 
-<!-- This displays the QuerySet of all articles -->
-<!-- {{articles}} -->
- <main class="grid-container">
-    <article>
+<main class="grid-container">
+    <article class="featured">
+        {% if article.image_file %}
+        <img src="{{ article.image_file.url }}" alt="">
+        {% else %}
+        <h2>No Image</h2>
+        {% endif %}
         <div>
             <h2>{{article.title}}</h2>
-            <h2>by {{article.author}}</h2>
+            <h3>by {{article.author}} at {{article.published}}</h3>
             <p>
                 {{article.text}}
             </p>
+            <h3>
+                <a href="{% url 'update_article' article.pk %}"
+            </h3>
         </div>
-        <img src="{{article.image_url}}" alt="">
-        
+
     </article>
-
-
+    
+    <div>
+        <h2>Comments</h2>
+        <h3>
+            <a href="{% url 'create_comment' article.pk %}">Create a comment</a>
+        </h3>
+        <!-- Display the comments about this article -->
+        <!-- {{article.get_all_comments}} -->
+        {% for comment in article.get_all_comments %}
+            <div>
+                <strong>by {{comment.author}} at {{comment.published}}</strong>
+                <p>
+                    {{comment.text}}
+                    <br>
+                    <a href="{% url 'delete_comment' comment.pk%}">Delete</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
 
 </main>
- {% endblock %}
+{% endblock %}
