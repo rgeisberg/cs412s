@@ -9,7 +9,7 @@ Description: create status html file for mini_fb-->
 
 <h2>Add status</h2>
 
-<form method = 'POST'>
+<form method = 'POST' enctype="multipart/form-data">
 
 <!-- customized table version here -->
 
@@ -19,11 +19,11 @@ Description: create status html file for mini_fb-->
           <tr>
             <th>{{field.name}}</th>
             <td>{{field}}</td>
+            <td><input type="file" name = "files" multiple /></td>
         </tr>
   
     {% endfor %}
     <tr>
-        <td></td>
         <td>
             <input type='submit' name = 'Add Status' value= 'addStatus'>
         </td>

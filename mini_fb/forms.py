@@ -21,6 +21,12 @@ class CreateStatusMessageForm(forms.ModelForm):
         model = StatusMessage
         fields = ['message']  # which fields from model should we use
 
+class UpdateProfileForm(forms.ModelForm):
+    """form to update an exsisting profile"""
+    class Meta:
+        """associate this form with the profile model"""
+        model = Profile
+        fields = ['city', 'email' , 'profileImageUrl' ]
 
 
 

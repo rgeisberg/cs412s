@@ -2,9 +2,9 @@
 # Author: Becky Geisberg, (rgeis26@bu.edu)
 # Description: views file for mini_fb
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView 
-from .models import Profile
-from .forms import CreateProfileForm, CreateStatusMessageForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from .models import Profile, Image, StatusImage
+from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
 from django.urls import reverse
 
 # Create your views here.
@@ -64,6 +64,18 @@ class CreateStatusMessageView(CreateView):
         # attach this profile to the status message
         form.instance.profile = profile # set the FK
 
+        # save the status message to database
+        sm = form.save()
+
+        # read the file from the form:
+        files = self.request.FILES.getlist('files')
+
+        for file in files:
+            image = Image(image_file=file, profile=profile)
+            image.save()
+            status_image = StatusImage(status_message=sm, image=image)
+            status_image.save()
+
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)
     
@@ -75,6 +87,13 @@ class CreateStatusMessageView(CreateView):
         pk = self.kwargs['pk']
         # call reverse to generate the URL for this profile
         return reverse('profile', kwargs={'pk':pk})
+
+class UpdateProfileView(UpdateView):
+    """view class to update a profile"""
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_fb/update_profile_form.html"
+
 
 
     
