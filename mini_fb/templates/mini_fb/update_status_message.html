@@ -1,0 +1,30 @@
+<!---File: update_status_message.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+ Description: update status message for mini_fb-->
+
+ <!-- mini_fb/templates/mini_fb/delete_status_message.html -->
+ {% extends 'mini_fb/base.html' %}
+
+ {% block content %}
+ 
+ <h3>Update status message</h3>
+ 
+ {{status_message}}
+ <p>
+ 
+ </p>
+ 
+ <form action="{% url 'update_status' status_message.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    </table>
+    <input type="submit" name="submit" value="Update">
+</form>
+ <!---cancel request -->
+ <form method='GET' action="{% url 'profile' status_message.profile.pk %}">
+     {% csrf_token %}
+     <input type='submit' value="Cancel">
+ </form>
+ 
+ {% endblock %}

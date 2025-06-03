@@ -28,6 +28,14 @@ class UpdateProfileForm(forms.ModelForm):
         model = Profile
         fields = ['city', 'email' , 'profileImageUrl' ]
 
+class UpdateMessageForm(forms.ModelForm):
+    """form to update an exsisting message"""
+    class Meta:
+        """associate this form with the message model"""
+        model = StatusMessage
+        fields = ['message' ]
+
+
 
 
 

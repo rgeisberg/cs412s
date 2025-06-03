@@ -21,16 +21,22 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
      <h2>Status Messages</h2>
  
      <section class="status-list">
-         {% for status_message in profile.get_status_messages %}
-         <div class="status-message">
+        {% for status_message in profile.get_status_messages %}
+        <div class="status-message">
              <strong>by {{status_message.profile}} at {{status_message.timestamp}}</strong>
              <p>{{status_message.message}}</p>
-         </div>
-         <div class="status-image">
-            {% for img in status_message.get_images %}
-            <img src='{{img.image.image_file.url}}' alt='{{img.image_file.url}}'>
-            {% endfor %}
-         </div>
+         
+
+            <div class="status-image">
+                {% for img in status_message.get_images %}
+                <img src='{{img.image.image_file.url}}' alt='{{img.image_file.url}}'>
+                {% endfor %}
+            </div>
+            <div class="status-actions">
+                <a href="{% url 'delete_status' status_message.pk %}" class="status-button">Delete</a>
+                <a href="{% url 'update_status' status_message.pk %}" class="status-button">Update</a>
+            </div>  
+        </div>      
          {% empty %}
          <p class="no-status">No status messages yet.</p>
          {% endfor %}
