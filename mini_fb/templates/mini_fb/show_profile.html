@@ -25,6 +25,11 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
              <strong>by {{status_message.profile}} at {{status_message.timestamp}}</strong>
              <p>{{status_message.message}}</p>
          </div>
+         <div class="status-image">
+            {% for img in status_message.get_images %}
+            <img src='{{img.image.image_file.url}}' alt='{{img.image_file.url}}'>
+            {% endfor %}
+         </div>
          {% empty %}
          <p class="no-status">No status messages yet.</p>
          {% endfor %}
