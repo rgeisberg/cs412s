@@ -1,0 +1,29 @@
+<!---File: news_feed.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+ Description: news feed file for mini_fb-->
+
+
+ {% extends 'mini_fb/base.html' %}
+
+ {% block content %}
+ <section class="friends">
+    <a href="{% url 'profile' profile.pk %}"class="status-button" >back to profile</a>
+    <a href="{% url 'show_all_profiles'  %}"class="status-button" >home page</a>
+    <div class="status-message">
+        <strong>{{profile.firstName}}'s News Feed:</strong>
+        {% for statusMessage in profile.get_news_feed %}
+        <p>{{statusMessage.profile.firstName}} {{statusMessage.profile.lastName}}</p>
+        <p>{{statusMessage.message}}</p> 
+        <div class="status-image">
+            {% for img in status_message.get_images %}
+            <img src='{{img.image.image_file.url}}' alt='{{img.image_file.url}}'>
+            {% endfor %}
+        </div>
+        <div class="status-image">
+        <img src='{{statusMessage.profile.profileImageUrl}}'> 
+        </div>
+        {% endfor %}
+    </div>
+ </section>
+
+ {% endblock %}

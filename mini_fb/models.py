@@ -64,8 +64,14 @@ class Profile(models.Model):
         current_friend_ids = [p.pk for p in current_friends]
         all_other_profiles = Profile.objects.exclude(pk=self.pk)
         suggestions = all_other_profiles.exclude(pk__in=current_friend_ids)
-        return suggestions     
-         
+        return suggestions
+    
+    def get_news_feed(self) :
+        """method to get a users feed"""
+        friends = self.get_friends()
+        friend_ids = [friend.pk for friend in friends]
+        return StatusMessage.objects.filter(profile__pk__in=friend_ids).order_by('-timestamp')
+
           
 
 

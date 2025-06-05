@@ -6,6 +6,7 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
 
  {% block content %}
  <main class="profile-container">
+     
      <section class="profile-card">
          <img src="{{profile.profileImageUrl}}" alt="Profile Image">
          <h2>{{profile.firstName}} {{profile.lastName}}</h2>
@@ -16,6 +17,7 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
      <div class="status-button-wrapper">
          <a href="{% url 'create_status' profile.pk %}" class="status-button"> Add Status Message</a>
          <a href="{% url 'update_profile' profile.pk %}" class="status-button"> Update Profile</a>
+         <a href="{% url 'news_feed' profile.pk %}" class="status-button">News Feed</a>
      </div>
  
      <h2>Status Messages</h2>

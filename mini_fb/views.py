@@ -133,7 +133,11 @@ class ShowFriendSuggestionsView(View):
             'profile': profile,
         })
 
-
+class ShowNewsFeedView(DetailView):
+    """Defind a view class to show one profile"""
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile' 
 
     
 
