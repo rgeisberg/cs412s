@@ -41,6 +41,17 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
          <p class="no-status">No status messages yet.</p>
          {% endfor %}
      </section>
+     <section class="friends">
+        <div class="status-message">
+            <strong>{{profile.firstName}}'s Friends:</strong>
+            {% for friend in profile.get_friends %}
+            <p>{{friend}}</p> 
+            <div class="status-image">
+            <img src='{{friend.profileImageUrl}}'> 
+            </div>
+            {% endfor %}
+        </div>
+     </section>
  </main>
  {% endblock %}
  

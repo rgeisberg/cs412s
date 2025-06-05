@@ -28,6 +28,23 @@ class Profile(models.Model):
     def get_absolute_url(self):
         """display new profile"""
         return reverse('profile', kwargs={'pk':self.pk})
+    
+    def get_friends(self):
+        '''accessor method to get all friend '''
+        friends = []
+        # Friends where this profile is profile1
+        friendships_as_profile1 = Friend.objects.filter(profile1=self)
+        for friendship in friendships_as_profile1:
+                friends.append(friendship.profile2)
+
+        # Friends where this profile is profile2
+        friendships_as_profile2 = Friend.objects.filter(profile2=self)
+        for friendship in friendships_as_profile2:
+                friends.append(friendship.profile1)
+        return friends
+                
+             
+         
           
 
 
@@ -70,5 +87,14 @@ class StatusImage(models.Model):
         return f"image plus {self.status_message}"
 
 
+
+class Friend(models.Model):
+     """Encapsulate the friend relationship as a model"""
+     profile1 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile1")
+     profile2 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile2")
+     timestamp = models.DateTimeField(auto_now=True)
+     
+     def __str__(self):
+        return f"{self.profile1} & {self.profile2}"
 
 
