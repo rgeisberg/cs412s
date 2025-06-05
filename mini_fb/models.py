@@ -42,8 +42,29 @@ class Profile(models.Model):
         for friendship in friendships_as_profile2:
                 friends.append(friendship.profile1)
         return friends
-                
-             
+    
+    def add_friend(self, other):
+        """Add a Friend relation for the two Profiles: self and other."""
+        if self == other:
+                print("Cannot self-friend")
+                return
+
+        # Check for existing friendship in either direction
+        existing_friendship1 = Friend.objects.filter(profile1=self, profile2=other).exists()
+        existing_friendship2 = Friend.objects.filter(profile1=other, profile2=self).exists()
+
+        if not existing_friendship1 and not existing_friendship2:
+                # Create and save the new Friend relationship
+                new_friendship = Friend(profile1=self, profile2=other)
+                new_friendship.save()
+
+    def get_friend_suggestions(self):
+        """Return Profiles that are not already friends and not self."""
+        current_friends = self.get_friends()
+        current_friend_ids = [p.pk for p in current_friends]
+        all_other_profiles = Profile.objects.exclude(pk=self.pk)
+        suggestions = all_other_profiles.exclude(pk__in=current_friend_ids)
+        return suggestions     
          
           
 

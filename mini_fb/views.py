@@ -1,11 +1,11 @@
 # File: views.py
 # Author: Becky Geisberg, (rgeis26@bu.edu)
 # Description: views file for mini_fb
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Profile, Image, StatusImage, StatusMessage
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from .models import Profile, Image, StatusImage, StatusMessage, Friend
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateMessageForm
-from django.urls import reverse
+from django.urls import reverse 
 
 # Create your views here.
 
@@ -115,7 +115,23 @@ class UpdateStatusMessageView(UpdateView):
         """route to url after success"""
         return reverse('profile', kwargs={'pk': self.object.profile.pk})
 
+class AddFriendView(View):
+    """view class to add a friend"""
+    
+    def dispatch(self, request, *args, **kwargs):
+        self_profile = Profile.objects.get(pk=kwargs['pk'])
+        other_profile = Profile.objects.get(pk=kwargs['other_pk'])
+        self_profile.add_friend(other_profile)
+        return redirect(reverse('profile', kwargs={'pk': self_profile.pk}))
+    
+class ShowFriendSuggestionsView(View):
+    """view class to show friend suggestions"""
 
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(pk=kwargs['pk'])
+        return render(request, 'mini_fb/friend_suggestions.html', {
+            'profile': profile,
+        })
 
 
 

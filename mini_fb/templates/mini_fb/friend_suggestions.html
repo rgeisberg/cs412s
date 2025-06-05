@@ -1,0 +1,22 @@
+<!---File: friend_suggestions.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+ Description: friend suggestions file for mini_fb-->
+
+ {% extends 'mini_fb/base.html' %}
+
+ {% block content %}
+ <section class="friends">
+    <a href="{% url 'profile' profile.pk %}"class="status-button" >back to profile</a>
+    <div class="status-message">
+        <strong>{{profile.firstName}}'s Friend suggestions:</strong>
+        {% for friend in profile.get_friend_suggestions %}
+        <p>{{friend}}</p> 
+        <div class="status-image">
+        <img src='{{friend.profileImageUrl}}'> 
+        <a href="{% url 'add_friend' profile.pk friend.pk %}" class="status-button">Add friend</a>
+        </div>
+        {% endfor %}
+    </div>
+ </section>
+
+ {% endblock %}
