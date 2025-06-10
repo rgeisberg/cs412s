@@ -15,9 +15,12 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
      </section>
  
      <div class="status-button-wrapper">
+        {% if request.user.is_authenticated and request.user == profile.user %}
          <a href="{% url 'create_status' profile.pk %}" class="status-button"> Add Status Message</a>
          <a href="{% url 'update_profile' profile.pk %}" class="status-button"> Update Profile</a>
          <a href="{% url 'news_feed' profile.pk %}" class="status-button">News Feed</a>
+         {% csrf_token %}
+         {% endif %}
      </div>
  
      <h2>Status Messages</h2>
@@ -35,8 +38,11 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
                 {% endfor %}
             </div>
             <div class="status-actions">
+                {% if request.user.is_authenticated and request.user == profile.user %}
                 <a href="{% url 'delete_status' status_message.pk %}" class="status-button">Delete</a>
                 <a href="{% url 'update_status' status_message.pk %}" class="status-button">Update</a>
+                {% csrf_token %}
+                {% endif %}
             </div>  
         </div>      
          {% empty %}
@@ -53,7 +59,10 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
             </div>
             {% endfor %}
         </div>
+        {% if request.user.is_authenticated and request.user == profile.user %}
         <a href="{% url 'friend_suggestions' profile.pk %}" class="status-button"> Friend Suggestions</a>
+        {% csrf_token %}
+        {% endif %}
      </section>
  </main>
  {% endblock %}

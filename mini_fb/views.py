@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Profile, Image, StatusImage, StatusMessage, Friend
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateMessageForm
 from django.urls import reverse 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -26,7 +27,7 @@ class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = "mini_fb/create_profile_form.html"
 
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     """Define a view class to create status messages"""
     form_class = CreateStatusMessageForm
     template_name = "mini_fb/create_status_form.html"
@@ -88,13 +89,13 @@ class CreateStatusMessageView(CreateView):
         # call reverse to generate the URL for this profile
         return reverse('profile', kwargs={'pk':pk})
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     """view class to update a profile"""
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     """view class to delete status message"""
     model = StatusMessage
     template_name = "mini_fb/delete_status_message.html"
@@ -104,7 +105,7 @@ class DeleteStatusMessageView(DeleteView):
         """route to url after success"""
         return reverse('profile', kwargs={'pk': self.object.profile.pk})
     
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
     """view class to update status message"""
     model = StatusMessage
     template_name = "mini_fb/update_status_message.html"
@@ -115,7 +116,7 @@ class UpdateStatusMessageView(UpdateView):
         """route to url after success"""
         return reverse('profile', kwargs={'pk': self.object.profile.pk})
 
-class AddFriendView(View):
+class AddFriendView(LoginRequiredMixin, View):
     """view class to add a friend"""
     
     def dispatch(self, request, *args, **kwargs):
@@ -124,7 +125,7 @@ class AddFriendView(View):
         self_profile.add_friend(other_profile)
         return redirect(reverse('profile', kwargs={'pk': self_profile.pk}))
     
-class ShowFriendSuggestionsView(View):
+class ShowFriendSuggestionsView(LoginRequiredMixin, View):
     """view class to show friend suggestions"""
 
     def dispatch(self, request, *args, **kwargs):
@@ -133,7 +134,7 @@ class ShowFriendSuggestionsView(View):
             'profile': profile,
         })
 
-class ShowNewsFeedView(DetailView):
+class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     """Defind a view class to show one profile"""
     model = Profile
     template_name = 'mini_fb/news_feed.html'

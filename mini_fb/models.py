@@ -3,6 +3,7 @@
 # Description: model file for mini_fb
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Profile(models.Model):
     city = models.TextField(blank=True)
     email = models.TextField(blank=True)
     profileImageUrl = models.URLField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
    # models.DateTimeField(auto_now=True)
 
     def __str__(self):
