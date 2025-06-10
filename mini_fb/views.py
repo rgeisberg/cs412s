@@ -7,6 +7,7 @@ from .models import Profile, Image, StatusImage, StatusMessage, Friend
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateMessageForm
 from django.urls import reverse 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -26,6 +27,12 @@ class CreateProfileView(CreateView):
     """Define a view class to create profiles"""
     form_class = CreateProfileForm
     template_name = "mini_fb/create_profile_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_creation_form = UserCreationForm()
+        context += user_creation_form
+        return context
 
 
 class CreateStatusMessageView(LoginRequiredMixin, CreateView):
