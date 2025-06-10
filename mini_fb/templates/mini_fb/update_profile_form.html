@@ -8,7 +8,7 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
 <h1>Update this Profile</h1>
 
 <!-- display the HTML form -->
-<form action="{% url 'update_profile' profile.pk %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
     {{form.as_table}}

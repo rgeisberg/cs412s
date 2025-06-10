@@ -13,7 +13,7 @@ Author: Becky Geisberg, (rgeis26@bu.edu)
         <p>{{friend}}</p> 
         <div class="status-image">
         <img src='{{friend.profileImageUrl}}'> 
-        <a href="{% url 'add_friend' profile.pk friend.pk %}" class="status-button">Add friend</a>
+        <a href="{% url 'add_friend' friend.pk %}" class="status-button">Add friend</a>
         </div>
         {% endfor %}
     </div>

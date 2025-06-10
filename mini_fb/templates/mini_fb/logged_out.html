@@ -1,0 +1,12 @@
+<!---File: logged_out.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: logged_out.html file for mini_fb-->
+<!-- mini_fb/logged_out.html -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>Logged out of your account </h1>
+<a href="{% url 'login' %}">Login</a>
+
+{% endblock %}

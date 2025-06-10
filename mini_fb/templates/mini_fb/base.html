@@ -15,9 +15,15 @@ Description: base.html file for mini_fb-->
                 <ul>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'show_all_profiles' %}">Show All Profiles</a></li>
-                    {% csrf_token %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button 
+                            type="submit" class="logout-button">Logout
+                        </button>
+                    </form>
                     {% else %}
                     <li><a href="{% url 'create_profile' %}">Create Profile</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                     {% if request.user.is_authenticated %}
                     Logged in as: {{request.user}}
