@@ -8,6 +8,7 @@ from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
 from django.urls import reverse 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 # Create your views here.
 
@@ -31,9 +32,24 @@ class CreateProfileView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_creation_form = UserCreationForm()
-        context += user_creation_form
+        context['user_creation_form'] = user_creation_form
         return context
+    
+    def form_valid(self, form):
+        user_form = UserCreationForm(self.request.POST)
 
+        if user_form.is_valid():
+            user = user_form.save()
+            login(self.request, user)
+            form.instance.user = user
+            return super().form_valid(form)
+        else:
+            print("UserCreationForm errors:", user_form.errors)
+            return self.render_to_response(
+                self.get_context_data(form=form, user_creation_form=user_form)
+            )
+
+        
 
 class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     """Define a view class to create status messages"""
