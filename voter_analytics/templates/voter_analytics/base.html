@@ -1,0 +1,27 @@
+<!---File: base.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: base.html file for voter analytics-->
+
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Voter Project{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles-mini-fb.css' %}">
+   
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <a href="{% url 'voters' %}"><h1>{% block header %}Voter Records{% endblock %}</h1></a>
+        <a href="{% url 'graphs' %}"><h1>Graphs</h1></a>
+        <hr>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

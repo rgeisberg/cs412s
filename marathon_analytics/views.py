@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from . models import Result
 import plotly
 import plotly.graph_objs as go
+import plotly.offline
 
 class ResultsListView(ListView):
 

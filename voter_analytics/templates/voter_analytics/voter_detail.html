@@ -1,0 +1,35 @@
+<!---File: voter_detail.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: voter_detail.html file for voter analytics-->
+
+{% extends "voter_analytics/base.html" %}
+
+{% block content %}
+<a href="{% url 'voters' %}">&larr; Back to list</a>
+  <h2>Voter Detail</h2>
+  <table>
+    <tr><th>First Name</th><td>{{ voter.first_name }}</td></tr>
+    <tr><th>Last Name</th><td>{{ voter.last_name }}</td></tr>
+    <tr><th>Street Number</th><td>{{ voter.street_number }}</td></tr>
+    <tr><th>Street Name</th><td>{{ voter.street_name }}</td></tr>
+    <tr><th>Apartment Number</th><td>{{ voter.apartment_number }}</td></tr>
+    <tr><th>Zip Code</th><td>{{ voter.zip_code }}</td></tr>
+    <tr><th>Birth Date</th><td>{{ voter.date_of_birth }}</td></tr>
+    <tr><th>Registration Date</th><td>{{ voter.date_of_registration }}</td></tr>
+    <tr><th>Party Affiliation</th><td>{{ voter.party_affiliation }}</td></tr>
+    <tr><th>Precinct Number</th><td>{{ voter.precinct_number }}</td></tr>
+    <tr><th>Voter Score</th><td>{{ voter.voter_score }}</td></tr>
+    <tr><th>Voted in 2020 State?</th><td>{{ voter.v20state }}</td></tr>
+    <tr><th>Voted in 2021 Town?</th><td>{{ voter.v21town }}</td></tr>
+    <tr><th>Voted in 2021 Primary?</th><td>{{ voter.v21primary }}</td></tr>
+    <tr><th>Voted in 2022 General?</th><td>{{ voter.v22general }}</td></tr>
+    <tr><th>Voted in 2023 Town?</th><td>{{ voter.v23town }}</td></tr>
+  </table>
+
+  <!-- Google Maps link for street address -->
+  <p>
+    <a href="https://www.google.com/maps/search/?api=1&query={{ voter.street_number|urlencode }}+{{ voter.street_name|urlencode }}+{{ voter.zip_code|urlencode }}"
+       target="_blank">View on Google Maps</a>
+  </p>
+  
+{% endblock %}
