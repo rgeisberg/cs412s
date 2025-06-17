@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SPOONACULAR_API_KEY = "2631837af5964172845bd6e3b0b5c654"
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'mini_fb',
     'marathon_analytics',
     'voter_analytics',
+    'project'
 ]
 
 MIDDLEWARE = [
