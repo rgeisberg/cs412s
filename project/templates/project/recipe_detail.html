@@ -1,0 +1,30 @@
+<!---File: recipe_detail.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: detail .html file for recipes-->
+{% extends 'project/base.html' %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+
+{% if recipe.image %}
+  <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+{% endif %}
+
+<p><strong>Description:</strong> {{ recipe.description }}</p>
+
+<h3>Ingredients</h3>
+<ul>
+  {% for ingredient in recipe.ingredient_set.all %}
+    <li>{{ ingredient.quantity }} {{ ingredient.ingredient_name }}</li>
+  {% empty %}
+    <li>No ingredients listed.</li>
+  {% endfor %}
+</ul>
+
+<p><strong>Steps:</strong></p>
+<pre>{{ recipe.steps }}</pre>
+
+
+
+<p><a href="{{ recipe.source_url }}" target="_blank">View Original Source</a></p>
+{% endblock %}

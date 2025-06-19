@@ -1,0 +1,24 @@
+<!---File: shoe_all_recipes.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: show all.html file for recipes-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+  <h1>All Recipes</h1>
+  <ul>
+    {% for recipe in recipes %}
+      <li>
+        {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+        {% endif %}
+        <p><strong><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></strong></p> 
+        <br>
+        <a href="{{ recipe.source_url }}" target="_blank">View Source</a>
+        <hr>
+      </li>
+    {% empty %}
+      <p>No recipes found.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -5,8 +5,24 @@ import os
 from django.core.files.base import ContentFile
 from django.utils import timezone
 from django.conf import settings
-from .models import Recipe
+from .models import Recipe, Ingredient
 from urllib.parse import urlparse
+
+def fetch_ingredients_by_id(recipe_id):
+    url = f"https://api.spoonacular.com/recipes/{recipe_id}/information"
+    params = {
+        'includeNutrition': False,
+        'apiKey': settings.SPOONACULAR_API_KEY
+    }
+    resp = requests.get(url, params=params)
+    if resp.status_code != 200:
+        print(f"Failed to fetch ingredients for ID {recipe_id}")
+        return []
+
+    data = resp.json()
+    ingredients = data.get('extendedIngredients', [])
+    return ingredients
+
 
 def fetch_steps_by_id(recipe_id):
     url = f"https://api.spoonacular.com/recipes/{recipe_id}/analyzedInstructions"
@@ -110,6 +126,14 @@ def load_data_from_spoonacular(query='pasta', number=5):
             recipe.image.save(image_name, image_file, save=False)
 
         recipe.save()
+        ingredients = fetch_ingredients_by_id(recipe_id)
+        for ing in ingredients:
+            Ingredient.objects.create(
+                ingredient_name=ing.get('name', 'Unknown'),
+                quantity=ing.get('original', ''),  # full string like "2 tablespoons olive oil"
+                recipe=recipe
+            )
+
 
     print(f"Successfully loaded {len(recipes)} recipes with image downloads.")
 

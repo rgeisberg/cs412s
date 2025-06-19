@@ -1,0 +1,49 @@
+/* General layout */
+body {
+    font-family: sans-serif;
+    background-color: #fff8fc;
+    color: #333;
+    margin: 0;
+    padding: 2em;
+}
+
+/* Header */
+h1, h2 {
+    text-align: center;
+    color: #c71585;
+}
+
+/* Recipe list */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 3em;
+}
+
+/* Images */
+img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+/* Recipe title */
+li strong {
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 0.25em;
+}
+
+/* Source link */
+a {
+    color: #7b1fa2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
