@@ -13,8 +13,19 @@ Description: base.html file for recipes-->
 <body>
 
     <nav>
-        <a href="{% url 'show_all_recipes' %}">All Recipes</a>
+        <a href="{% url 'show_all_recipes' %}">All Recipes</a> |
         <!-- Add more nav links here -->
+        {% if user.is_authenticated %}
+           | Hello, {{ user.username }} |
+           <a href="{% url 'profile' %}">My Profile</a> |
+           <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+          </form>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
     </nav>
 
     <div class="container">

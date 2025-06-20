@@ -1,0 +1,16 @@
+<!---File: profile.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: profile.html file for recipes-->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+  <h1>{{ profile.user.username }}'s Profile</h1>
+
+  {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150">
+  {% endif %}
+
+  <p>Email: {{ profile.user.email }}</p>
+  <p>Joined: {{ profile.user.date_joined }}</p>
+{% endblock %}
