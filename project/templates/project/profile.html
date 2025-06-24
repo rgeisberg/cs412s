@@ -13,4 +13,17 @@ Description: profile.html file for recipes-->
 
   <p>Email: {{ profile.user.email }}</p>
   <p>Joined: {{ profile.user.date_joined }}</p>
+  {% if saved_recipes %}
+    <ul>
+      <h1>Saved Recipies</h1>
+      <hr>
+        {% for recipe in saved_recipes %}
+            <li>
+                <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't saved any recipes yet.</p>
+{% endif %}
 {% endblock %}

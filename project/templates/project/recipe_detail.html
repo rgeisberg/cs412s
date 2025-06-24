@@ -10,7 +10,7 @@ Description: detail .html file for recipes-->
   <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
 {% endif %}
 
-<p><strong>Description:</strong> {{ recipe.description }}</p>
+<p><strong>Description:</strong> {{ recipe.description|safe }}</p>
 
 <h3>Ingredients</h3>
 <ul>
@@ -27,4 +27,29 @@ Description: detail .html file for recipes-->
 
 
 <p><a href="{{ recipe.source_url }}" target="_blank">View Original Source</a></p>
+<h2>Comments</h2>
+<ul>
+  {% for comment in comments %}
+    <li>
+      <div class="comment-box">
+      <strong>{{ comment.profile.user.username }}</strong> rated {{ comment.rating }}/5:
+      <p>{{ comment.comment }}</p>
+      <small class="comment-date">{{ comment.date_posted }}</small>
+      </div>
+    </li>
+  {% empty %}
+    <li>No comments yet.</li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+  <h3>Leave a Comment</h3>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post Comment</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'login' %}">Log in</a> to comment.</p>
+{% endif %}
 {% endblock %}

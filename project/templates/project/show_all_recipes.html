@@ -6,6 +6,11 @@ Description: show all.html file for recipes-->
 
 {% block content %}
   <h1>All Recipes</h1>
+
+  <form method="GET" action="{% url 'show_all_recipes' %}">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search here">
+    <button type="submit">Search</button>
+  </form>
   <ul>
     {% for recipe in recipes %}
       <li>
@@ -15,7 +20,11 @@ Description: show all.html file for recipes-->
         <p><strong><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></strong></p> 
         <br>
         <a href="{{ recipe.source_url }}" target="_blank">View Source</a>
-        <hr>
+        <form method="POST" action="{% url 'save_recipe' recipe.pk %}">
+          {% csrf_token %}
+          <button type="submit">Save</button>
+      </form>
+      <hr>
       </li>
     {% empty %}
       <p>No recipes found.</p>
