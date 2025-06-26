@@ -14,5 +14,7 @@ urlpatterns = [
     path('signup/', CreateProfileView.as_view(), name='signup'),
     path('profile/', UserProfileView.as_view(), name='profile'),
     path('recipes/<int:pk>/save/', SaveRecipeView.as_view(), name='save_recipe'),
+    path('submit_recipe/', SubmitRecipeURLView.as_view(), name='submit_recipe'),
+    path('submit_manual_recipe/', CreateRecipeView.as_view(), name='submit_manual_recipe'),
 
 ]

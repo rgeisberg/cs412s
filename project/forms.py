@@ -13,6 +13,7 @@ class CreateProfileForm(forms.ModelForm):
         fields = ['profile_picture']
 
 class CustomUserCreationForm(UserCreationForm):
+    """create user"""
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -20,6 +21,21 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         
 class CommentReviewForm(forms.ModelForm):
+    """leave comment"""
     class Meta:
         model = CommentReview
         fields = ['rating', 'comment']
+
+class RecipeURLForm(forms.Form):
+    """create a recipe from url"""
+    url = forms.URLField(label='Recipe URL', help_text='Enter a valid recipe URL.')
+
+class CreateRecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['title', 'description', 'cooking_time', 'image', 'steps']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'steps': forms.Textarea(attrs={'rows': 6, 'class': 'form-control'}),
+        }

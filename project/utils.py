@@ -138,6 +138,60 @@ def load_data_from_spoonacular(query='pasta', number=5):
     print(f"Successfully loaded {len(recipes)} recipes with image downloads.")
 
 
+def load_data_from_spoonacular_url(url):
+    """Takes a URL and attempts to fetch a recipe from Spoonacular based on it."""
+    search_url = "https://api.spoonacular.com/recipes/extract"
+    params = {
+        'url': url,
+        'apiKey': settings.SPOONACULAR_API_KEY
+    }
+
+    response = requests.get(search_url, params=params)
+    if response.status_code != 200:
+        print("Spoonacular extract error:", response.status_code)
+        return False
+
+    data = response.json()
+    title = data.get('title', 'No title')
+    description = data.get('summary', 'No description')
+    cuisine = ', '.join(data.get('cuisines', [])) or 'Unknown'
+    cooking_time = data.get('readyInMinutes', 0)
+    image_url = data.get('image', '')
+    source_url = data.get('sourceUrl', '')
+    source_name = data.get('sourceName', 'Spoonacular')
+
+    steps_text = ""
+    for block in data.get('analyzedInstructions', []):
+        for step in block.get('steps', []):
+            steps_text += f"{step.get('step')}\n"
+
+    if not steps_text:
+        steps_text = data.get('instructions', '') or 'No steps provided'
+
+    # Download image
+    image_file, image_name = download_image_to_field(image_url)
+
+    recipe = Recipe(
+        title=title,
+        description=description,
+        cuisine_type=cuisine,
+        cooking_time=cooking_time,
+        difficulty='Medium',
+        steps=steps_text,
+        date_added=timezone.now(),
+        recipe_type='UserSubmitted',
+        source_url=source_url,
+        source_name=source_name
+    )
+
+    if image_file and image_name:
+        recipe.image.save(image_name, image_file, save=False)
+
+    recipe.save()
+    return True
+
+
+
 # import requests
 # from bs4 import BeautifulSoup
 # from django.utils import timezone

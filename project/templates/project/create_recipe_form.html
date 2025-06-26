@@ -1,0 +1,12 @@
+<!---File: create_recipe_form.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: create_recipe_form file for recipes-->
+{% extends 'project/base.html' %}
+{% block content %}
+  <h2>Submit Your Own Recipe</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Recipe</button>
+  </form>
+{% endblock %}

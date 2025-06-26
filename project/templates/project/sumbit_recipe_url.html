@@ -1,0 +1,14 @@
+<!---File: submit_recipe_url.html
+Author: Becky Geisberg, (rgeis26@bu.edu)
+Description: submit recipe.html file for recipes-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+  <h2>Submit a Recipe URL</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Recipe</button>
+  </form>
+{% endblock %}

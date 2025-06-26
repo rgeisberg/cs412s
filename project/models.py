@@ -31,8 +31,8 @@ class Recipe(models.Model):
 
     title = models.TextField()
     description = models.TextField()
-    cuisine_type = models.TextField()
-    cooking_time = models.IntegerField()
+    cuisine_type = models.TextField(null=True, blank=True)
+    cooking_time = models.IntegerField(null=True, blank=True)
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, blank=True)
     image = models.ImageField(upload_to='recipe_images/', blank=True, null=True)
     steps = models.TextField()

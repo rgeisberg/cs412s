@@ -20,6 +20,8 @@ Description: base.html file for recipes-->
         <div class="nav-right">
           {% if user.is_authenticated %}
             <span class="nav-greeting">Hello, {{ user.username }}</span>
+            <a href="{% url 'submit_recipe' %}">Submit a Recipe URL</a>
+            <a href="{% url 'submit_manual_recipe' %}">Manually Submit a Recipe</a>
             <a href="{% url 'profile' %}">My Profile</a>
             <form action="{% url 'logout' %}" method="post">
               {% csrf_token %}

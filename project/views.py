@@ -6,12 +6,15 @@ from django.shortcuts import render
 from django.views.generic import *
 from .models import *
 from .forms import *
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.timezone import now
 from django.shortcuts import redirect
+from .utils import load_data_from_spoonacular_url
+from django.db.models import Q
 
 class ShowAllRecipes(ListView):
     """view to show all recipes"""
@@ -30,7 +33,8 @@ class ShowAllRecipes(ListView):
         self.query = query  # store for use in context
         qs = Recipe.objects.all().order_by('-date_added')
         if query:
-            qs = qs.filter(title__icontains=query)
+            qs = qs.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
         return qs
 
 class RecipeDetailView(DetailView):
@@ -123,3 +127,30 @@ class SaveRecipeView(LoginRequiredMixin, View):
             # You could log this or show a message if desired
             pass
         return redirect(reverse('profile'))
+    
+class SubmitRecipeURLView(LoginRequiredMixin, FormView):
+    template_name = 'project/sumbit_recipe_url.html'
+    form_class = RecipeURLForm
+    success_url = reverse_lazy('show_all_recipes')
+
+    def form_valid(self, form):
+        url = form.cleaned_data['url']
+        success = load_data_from_spoonacular_url(url)
+        if success:
+            messages.success(self.request, "Recipe successfully added!")
+        else:
+            messages.error(self.request, "Could not fetch recipe from that URL.")
+        return super().form_valid(form)
+    
+class CreateRecipeView(LoginRequiredMixin, CreateView):
+    """manually create recipe """
+    model = Recipe
+    form_class = CreateRecipeForm
+    template_name = 'project/create_recipe_form.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user  
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('show_all_recipes')
