@@ -20,10 +20,12 @@ Description: show all.html file for recipes-->
         <p><strong><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></strong></p> 
         <br>
         <a href="{{ recipe.source_url }}" target="_blank">View Source</a>
+        {% if user.is_authenticated %}
         <form method="POST" action="{% url 'save_recipe' recipe.pk %}">
           {% csrf_token %}
           <button type="submit">Save</button>
       </form>
+      {% endif %}
       <hr>
       </li>
     {% empty %}

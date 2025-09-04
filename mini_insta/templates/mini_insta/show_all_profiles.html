@@ -1,0 +1,27 @@
+{% extends 'mini_fb/base.html' %}
+
+ {% block content %}
+ <h1>Showing all Profiles</h1>
+ 
+ <!-- This displays the QuerySet of all articles -->
+
+  <main class="grid-container">
+     <!---scriptlet code for a for-loop-->
+     {% for profile in profiles %}
+     <a href="{% url 'profile' profile.pk %}">
+     <article>
+         <div>
+             <h2>{{profile.displayName}}</h2>
+             <h2>{{profile.lastName}}</h2>
+         </div>
+         
+         <img src="{{profile.profileImageUrl}}" alt="">
+        </a>
+         
+    </article>
+        
+     <hr>
+     {% endfor %}
+ 
+ </main>
+  {% endblock %}
