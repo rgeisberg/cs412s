@@ -1,4 +1,4 @@
-{% extends 'mini_fb/base.html' %}
+{% extends 'mini_insta/base.html' %}
 
  {% block content %}
  <h1>Showing all Profiles</h1>
@@ -11,11 +11,11 @@
      <a href="{% url 'profile' profile.pk %}">
      <article>
          <div>
-             <h2>{{profile.displayName}}</h2>
-             <h2>{{profile.lastName}}</h2>
+             <h2>{{profile.username}}</h2>
+             <h2>{{profile.display_name}}</h2>
          </div>
          
-         <img src="{{profile.profileImageUrl}}" alt="">
+         <img src="{{profile.profile_image_url}}" alt="">
         </a>
          
     </article>
